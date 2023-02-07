@@ -21,4 +21,13 @@ class APIUnitTest {
         val result = runBlocking { PokeAPIClient.api.getPokemon(pikachuId) }
         assertEquals(expectedUrl, result.sprites.other.officialArtwork.frontDefault)
     }
+
+    @Test
+    fun getSpecies_isSuccess() {
+        val expectedName = "ピカチュウ"
+        val result = runBlocking { PokeAPIClient.api.getSpecies(pikachuId) }
+        val japanese = result.names.first { it.language.name == "ja-Hrkt" }
+        assertEquals(expectedName, japanese.name)
+    }
+
 }
